@@ -31,9 +31,11 @@ class SingleClassImageHandler():
 
         return sub_image
 
-data_root = r'H:\工作\遥感相关\Land use\小区域实验分割'
+data_root = r'.\landuse'
 commercial_image = r'commercial_clip_rgb.jpg'
 Industrial_image = r'Industrial_clip_rgb.jpg'
 Residentia_image = r'Residentia_clip_rgb.jpg'
+Servicepublic_image = r'Servicepublic_clip_rgb.jpg'
+
 
 img_size = 255
