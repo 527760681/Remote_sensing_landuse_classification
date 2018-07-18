@@ -49,9 +49,17 @@ class SingleClassImageHandler():
         return False
 
 
-data_root = r'.\landuse'
-sub_image_root = r'.\sub_image'
-csv_path = r'class.txt'
+# data_root = r'.\landuse'
+# sub_image_root = r'.\sub_image'
+# csv_path = r'class.txt'
+# commercial_image = r'commercial_clip_rgb.jpg'
+# Industrial_image = r'Industrial_clip_rgb.jpg'
+# Residentia_image = r'Residentia_clip_rgb.jpg'
+# Servicepublic_image = r'Servicepublic_clip_rgb.jpg'
+
+data_root = r'.\testRegion'
+sub_image_root = r'.\testRegion\sub_image'
+csv_path = r'.\testRegion\class.txt'
 commercial_image = r'commercial_clip_rgb.jpg'
 Industrial_image = r'Industrial_clip_rgb.jpg'
 Residentia_image = r'Residentia_clip_rgb.jpg'
@@ -62,7 +70,7 @@ img_size = 128
 num_classes = 4
 
 
-#
+
 # '''
 # split image into target size
 # '''
@@ -124,3 +132,22 @@ def load_data(csv_path,num_classes):
     y_test = to_categorical(y_test, num_classes=num_classes)
 
     return X_train, X_test, y_train, y_test
+
+def load_test_data(csv_path,num_classes):
+    X = []
+    Y = []
+    reader = csv.reader(open(csv_path, 'r', encoding='utf8'))
+    for img_path, class_num in reader:
+        img = Image.open(img_path)
+        img_array = np.array(img)
+        X.append(img_array)
+        Y.append(class_num)
+
+    data = np.stack(X, axis=0)
+    label = np.stack(Y, axis=0)
+
+    # X_train, X_test, y_train, y_test = train_test_split(data, label, test_size=0.1, random_state=42)
+    X_test =data
+    y_test = to_categorical(label, num_classes=num_classes)
+
+    return X_test, y_test
